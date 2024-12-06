@@ -212,6 +212,15 @@ class EntriesExport implements FromCollection, WithStyles
             return collect($value->value())->implode(', ');
         }
 
+        if ($fieldType instanceof \Rias\StatamicAddressField\Fieldtypes\Address) {
+            $address = $value->value();
+            $street = Arr::get($address, 'street');
+            $postCode = Arr::get($address, 'postCode');
+            $city = Arr::get($address, 'city');
+
+            return "$street, $postCode $city";
+        }
+
         return '';
     }
 
